@@ -1,0 +1,6 @@
+#!/bin/bash
+
+ft=$(mktemp --suffix=".svg")
+obabel -:"$1" -O $ft > /dev/null 2>&1
+cat $ft
+
