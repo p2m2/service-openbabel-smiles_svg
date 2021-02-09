@@ -28,6 +28,5 @@ retention policy : oldest ask are removed.
 
 
 ```bash
-docker run -p 3000:30005 --env PORT=30005 --env MAX_RETENTION=50000 --env SIZE_CLEAN_RETENTION=10 \ 
--t inraep2m2/service-openbabel-smiles_svg smiles_to_svg "CN1CCC[C@H]1c2cccnc2" > smiles_mol.svg
+docker run -p 3000:30005 --env PORT=30005 --env MAX_RETENTION=50000 --env SIZE_CLEAN_RETENTION=10 -t inraep2m2/service-openbabel-smiles_svg
 ```
