@@ -1,6 +1,7 @@
 const os = require("os");
 const express = require('express') ;
 const { exec } = require('child_process');
+const createError = require('http-errors')
 
 const app = express() ;
 var port = 3000 ;
@@ -45,14 +46,14 @@ app.get('/smiles', (req, res) => {
     retention[idxObj.i].date = Date.now();
     res.send(idxObj.v.svg);
   } else {
-     let cmd=`obabel -:"${smiles_code}" -o svg | grep -v "molecule converted"`
+     let cmd=`obabel -:"${smiles_code}" --gen3d -o svg | grep -v "molecule converted"`
      console.log(cmd)
      exec(cmd, (err, stdout, stderr) => {
-      if (err) {
-        //some err occurred
-        console.error(err)
-      } else {
-        //let svg = stdout.replace(/[\n\r]/g, '').trim() ;
+        console.log(err)
+        if (err) {
+            res.send(createError(400, `Stdout '${stdout}' \n Stderr '${stderr}'`))
+            return
+        }
 
         console.log(Object.keys(retention).length)
         if ( Object.keys(retention).length >= max_retention ) {
@@ -67,13 +68,9 @@ app.get('/smiles', (req, res) => {
         })
         console.error(stderr);
         res.send(svg)
-      }
     });
 
   }
-
-
-
 })
 
 app.listen(port, () => {
