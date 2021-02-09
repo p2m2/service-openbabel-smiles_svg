@@ -12,6 +12,7 @@ COPY ./smiles_to_svg /usr/bin/
 WORKDIR /service
 RUN npm install
 RUN npm install express
+RUN npm install http-errors
 COPY service.js .
 CMD ["node" ,"service.js"]
 

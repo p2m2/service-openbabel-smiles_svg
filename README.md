@@ -13,10 +13,17 @@ return a svg image with the following request `http://<host>/smiles?<smiles>`
 
 ### use in img tag  
 
+#### 2D Depiction
+
 ```html
 <img src="http://localhost:3000/smiles?CN1CCC[C@H]1c2cccnc2" decoding="async" loading="lazy" alt="Nicotine" >
 ```
 
+#### 3D Structure Generation
+
+```html
+<img src="http://localhost:3000/smiles/gen3d?CN1CCC[C@H]1c2cccnc2" decoding="async" loading="lazy" alt="Nicotine" >
+```
 
 ### env var
 
